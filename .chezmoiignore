@@ -1,0 +1,4 @@
+# ignore pyenv versions and cache
+.pyenv/versions/**
+.pyenv/cache/**
+.oh-my-zsh/cache/**

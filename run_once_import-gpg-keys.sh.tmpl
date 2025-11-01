@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PUBLIC_KEY="{{ (index (index (keeper .kp.gpg).fields 1).value 0).publicKey }}"
+PRIVATE_KEY="{{ (index (index (keeper .kp.gpg).fields 1).value 0).privateKey }}"
+SUBPRIV="{{ index (index (keeper .kp.gpg).custom 0).value 0 }}"
+OWNERTRUST="{{ index (index (keeper .kp.gpg).custom 1).value 0 }}"
+
+# Import public keys
+echo "$PUBLIC_KEY" | gpg --import 
+echo "$PRIVATE_KEY" | gpg --allow-secret-key-import --import
+echo "$SUBPRIV" | gpg --allow-secret-key-import --import
+
+# Trust your keys (optional)
+echo "$OWNERTRUST" | gpg --import-ownertrust

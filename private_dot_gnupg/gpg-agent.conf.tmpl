@@ -1,0 +1,7 @@
+{{- if eq .chezmoi.os "darwin" }}
+pinentry-program {{ .chezmoi.pathSeparator }}opt{{ .chezmoi.pathSeparator }}homebrew{{ .chezmoi.pathSeparator }}bin{{ .chezmoi.pathSeparator }}pinentry-mac
+{{- else }}
+pinentry-program pinentry-curses
+{{- end }}
+allow-loopback-pinentry
+

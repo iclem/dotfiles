@@ -1,0 +1,34 @@
+#
+alias cbs="rm -rf /tmp/ClientByServer; rsync -zqr batch06:/space/home/lengow/apps/core/ClientByServer /tmp;mkdir -p ~/ClientByServer;sudo cp /tmp/ClientByServer/* ~/ClientByServer;rm -rf /tmp/ClientByServer;echo 'done';"
+alias docker_api="docker run --rm -it --name api -v /home/clement-idelon/git/showflux:/usr/src/python/work/src -v /home/clement-idelon/ClientByServer:/space/home/lengow/apps/core/ClientByServer  -p 8052:8052 --net=host --privileged api-commandes "
+alias srvback01='ssh -o PreferredAuthentications=keyboard-interactive,password,publickey lengow@95.131.137.18'
+
+# Git aliases
+alias gst='git status'
+alias gc='git commit'
+alias gco='git checkout'
+alias gl='git pull'
+#alias gpom="git pull origin master"
+alias gp='git push'
+alias gd='git diff | mate'
+#alias gb='git branch'
+#alias gba='git branch -a'
+#alias gbdel='git branch -d'
+alias gsl='git stash && gl && git stash pop'
+alias gsp='git stash && gp && git stash pop'
+alias gsm='git stash && gco main && git stash pop' 
+
+alias lsttag="git tag | sort | tail -n1"
+
+alias wk_sfcc="export DJANGO_SETTINGS_MODULE=sfcc.settings.dev;cd ~/git/sfcc;. ~/.venv/sfcc/bin/activate"
+alias xmlfmt="xmllint --format"
+alias pycharm="/snap/pycharm-community/current/bin/pycharm.sh"
+alias insomnia="/snap/insomnia/current/insomnia"
+alias less.vim="/usr/share/vim/vim81/macros/less.sh"
+
+alias k='kubectl'
+alias kgc='kubectl config get-contexts'
+alias kuc='kubectl config use-context'
+alias asl='aws sts get-caller-identity &>/dev/null && echo "already connected"|| aws sso login'
+alias aecrl='asp tooling && asl && (aws ecr get-login-password | (docker login --username AWS --password-stdin 539241620210.dkr.ecr.eu-west-3.amazonaws.com))'
+# alias k9s='asl && k9s'
