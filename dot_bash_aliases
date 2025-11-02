@@ -1,8 +1,3 @@
-#
-alias cbs="rm -rf /tmp/ClientByServer; rsync -zqr batch06:/space/home/lengow/apps/core/ClientByServer /tmp;mkdir -p ~/ClientByServer;sudo cp /tmp/ClientByServer/* ~/ClientByServer;rm -rf /tmp/ClientByServer;echo 'done';"
-alias docker_api="docker run --rm -it --name api -v /home/clement-idelon/git/showflux:/usr/src/python/work/src -v /home/clement-idelon/ClientByServer:/space/home/lengow/apps/core/ClientByServer  -p 8052:8052 --net=host --privileged api-commandes "
-alias srvback01='ssh -o PreferredAuthentications=keyboard-interactive,password,publickey lengow@95.131.137.18'
-
 # Git aliases
 alias gst='git status'
 alias gc='git commit'
@@ -32,3 +27,5 @@ alias kuc='kubectl config use-context'
 alias asl='aws sts get-caller-identity &>/dev/null && echo "already connected"|| aws sso login'
 alias aecrl='asp tooling && asl && (aws ecr get-login-password | (docker login --username AWS --password-stdin 539241620210.dkr.ecr.eu-west-3.amazonaws.com))'
 # alias k9s='asl && k9s'
+alias ll="eza -lh"
+alias cm="chezmoi"
