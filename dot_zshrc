@@ -179,3 +179,34 @@ if [ -x "$(command -v /home/linuxbrew/.linuxbrew/bin/brew)" ]; then
 elif [ -d "/opt/homebrew/bin"]; then
     export PATH=/opt/homebrew/bin:$PATH
 fi
+
+# PROMPT customizations
+
+COLOR_ARCH=magenta
+HOST_COLOR=green
+SYSTEM_COLOR=green
+local system=$(uname -o)
+if [[ "$(hostname)" =~ "rasp" ]]; then
+    local system="🍓 %{$fg[magenta]%}Raspberry Linux"
+elif [[ "$system" = "Darwin" ]]; then
+    local system="🍏 %{$fg[blue]%}$system"
+else
+    local system="%{$fg[green]%}$(uname -o)"
+fi
+local arch="%{$fg[$COLOR_ARCH]%}[$(arch)]"
+
+PROMPT="
+%{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
+%(#,%{$bg[yellow]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
+%{$reset_color%}@ \
+%{$fg[$HOST_COLOR]%}%m \
+$system $arch \
+%{$reset_color%}in \
+%{$terminfo[bold]$fg[yellow]%}%~%{$reset_color%}\
+${hg_info}\
+${git_info}\
+${svn_info}\
+${venv_info}\
+ \
+[%*] $exit_code
+%{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
