@@ -1,0 +1,16 @@
+layout {
+	tab name="Editor" {
+	    pane name="Files" size=10 borderless=true focus=true {
+		    command "yazi"
+	    }
+	    pane name="Editor" {
+	        command "hx"
+	    }
+    }
+    tab name="Git" {
+    	pane command="lazygit"
+    }
+    tab name="htop" {
+    	pane command="htop"
+    }
+}

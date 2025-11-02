@@ -1,13 +1,3 @@
-
-layout {
-    pane name="Files" size=10 borderless=true focus=true {
-        command "yazi"
-    }
-    pane name="Editor" {
-        command "hx"
-    }
-}
-
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
