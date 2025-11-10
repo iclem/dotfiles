@@ -68,9 +68,10 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+
 if command -v pyenv 1>/dev/null 2>&1; then
  eval "$(pyenv init -)"
- eval "$(pyenv virtualenv-init -)"
+ #eval "$(pyenv virtualenv-init -)"
 fi
 
 # Which plugins would you like to load?
@@ -87,7 +88,9 @@ plugins=(
   # zsh-autocomplete
   aws
   python
-  pyenv
+  # pyenv
+  k9s
+  chezmoi
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -161,10 +164,10 @@ export GPG_TTY=$(tty)
 export CLOUDSDK_PYTHON=${PYENV_ROOT}/versions/3.13.9/bin/python3.13
 
 # The next line updates PATH for the Google Cloud SDK.
-[ -f "$HOME/tmp/google-cloud-sdk/path.zsh.inc" ] && . "$HOME/tmp/google-cloud-sdk/path.zsh.inc"
+#[ -f "$HOME/tmp/google-cloud-sdk/path.zsh.inc" ] && . "$HOME/tmp/google-cloud-sdk/path.zsh.inc"
 
 # The next line enables shell command completion for gcloud.
-[ -f "$HOME/tmp/google-cloud-sdk/completion.zsh.inc" ]  && . "$HOME/tmp/google-cloud-sdk/completion.zsh.inc"
+#[ -f "$HOME/tmp/google-cloud-sdk/completion.zsh.inc" ]  && . "$HOME/tmp/google-cloud-sdk/completion.zsh.inc"
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=($HOME/.docker/completions $fpath)
@@ -176,9 +179,31 @@ compinit
 # Brew
 if [ -x "$(command -v /home/linuxbrew/.linuxbrew/bin/brew)" ]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [ -d "/opt/homebrew/bin"]; then
+elif [ -d "/opt/homebrew/bin" ]; then
     export PATH=/opt/homebrew/bin:$PATH
 fi
+
+
+
+
+# Use floating point numbers for time.
+typeset -F SECONDS
+
+# If command execution time above min. time, plugins will output time.
+ZSH_COMMAND_TIME_MIN_SECONDS=3
+
+# Message to display (set to "%s" for disable).
+ZSH_COMMAND_TIME_MSG="Execution time: %s sec"
+
+# Message color.
+ZSH_COMMAND_TIME_COLOR="cyan"
+
+# Don’t colorize the output based on the duration. Default colors: green < 1 min, yellow < 3 min, red >= 3 min.
+ZSH_COMMAND_TIME_NO_COLOR="1"
+
+# Exclude some commands
+ZSH_COMMAND_TIME_EXCLUDE=(vim mcedit)
+
 
 # PROMPT customizations
 
@@ -210,3 +235,18 @@ ${venv_info}\
  \
 [%*] $exit_code
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
+
+
+
+function preexec() {
+  timer=${timer:-$SECONDS}
+}
+
+function precmd() {
+  if [ $timer ]; then
+    timer_show=$(($SECONDS - $timer))
+    timer_show=$(printf "%.03f" timer_show)
+    export RPROMPT="%F{cyan}${timer_show}s %{$reset_color%}"
+    unset timer
+  fi
+}

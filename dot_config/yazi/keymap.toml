@@ -2,3 +2,8 @@
 prepend_keymap = [
     { on = ["<C-e>"], run = "open --interactive", desc = "Open with Helix" },
 ]
+
+[[openers]]
+name = "zellij-stack"
+run = 'zellij action new-pane -c -d down -- hx "$@"'
+block = true
