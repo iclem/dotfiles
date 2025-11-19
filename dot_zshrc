@@ -86,11 +86,13 @@ plugins=(
   # fast-syntax-highlighting
   zsh-autosuggestions
   # zsh-autocomplete
+  brew
   aws
   python
   # pyenv
   k9s
   chezmoi
+  # direnv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -211,20 +213,23 @@ COLOR_ARCH=magenta
 HOST_COLOR=green
 SYSTEM_COLOR=green
 local system=$(uname -o)
-if [[ "$(hostname)" =~ "rasp" ]]; then
+if [[ "${(L)$(hostname)}" =~ "rasp" ]]; then
     local system="🍓 %{$fg[magenta]%}Raspberry Linux"
 elif [[ "$system" = "Darwin" ]]; then
     local system="🍏 %{$fg[blue]%}$system"
+elif [[ "${(L)${system}}" =~ "linux" ]]; then
+    local system="🐧 %{$fg[cyan]%}$(uname -o)"
 else
-    local system="%{$fg[green]%}$(uname -o)"
+    local system="%{$fg[cyan]%}$(uname -o)"
 fi
 local arch="%{$fg[$COLOR_ARCH]%}[$(arch)]"
 
 PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
-%(#,%{$bg[yellow]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
-%{$reset_color%}@ \
-%{$fg[$HOST_COLOR]%}%m \
+%(#,%{$bg[yellow]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n)\
+%{$reset_color%}@\
+%{$terminfo[bold]$fg[$HOST_COLOR]%}%m \
+%{$reset_color%}\
 $system $arch \
 %{$reset_color%}in \
 %{$terminfo[bold]$fg[yellow]%}%~%{$reset_color%}\
