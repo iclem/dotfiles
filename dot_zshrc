@@ -93,6 +93,7 @@ plugins=(
   k9s
   chezmoi
   # direnv
+  zsh-uv-env
 )
 
 source $ZSH/oh-my-zsh.sh

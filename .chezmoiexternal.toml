@@ -17,6 +17,12 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
+[".oh-my-zsh/custom/plugins/zsh-uv-env"]
+    type = "archive"
+    url = "https://github.com/matthiasha/zsh-uv-env/archive/master.tar.gz"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
 [".pyenv"]
     type = "archive"
     url = "https://github.com/pyenv/pyenv/archive/master.tar.gz"
