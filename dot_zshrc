@@ -71,7 +71,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 
 if command -v pyenv 1>/dev/null 2>&1; then
  eval "$(pyenv init -)"
- #eval "$(pyenv virtualenv-init -)"
+ eval "$(pyenv virtualenv-init -)"
 fi
 
 # Which plugins would you like to load?
@@ -217,9 +217,9 @@ local system=$(uname -o)
 if [[ "${(L)$(hostname)}" =~ "rasp" ]]; then
     local system="🍓 %{$fg[magenta]%}Raspberry Linux"
 elif [[ "$system" = "Darwin" ]]; then
-    local system="🍏 %{$fg[blue]%}$system"
+    local system=" %{$fg[blue]%}$system"
 elif [[ "${(L)${system}}" =~ "linux" ]]; then
-    local system="🐧 %{$fg[cyan]%}$(uname -o)"
+    local system="🐧 %{$fg[cyan]%}$(uname -o)">>>>>> Stashed changes
 else
     local system="%{$fg[cyan]%}$(uname -o)"
 fi
