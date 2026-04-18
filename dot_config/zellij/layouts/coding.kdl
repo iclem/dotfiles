@@ -1,33 +1,30 @@
 layout {
-    cwd "/home/clement"
     tab name="Coding" focus=true hide_floating_panes=true {
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
         }
         pane split_direction="vertical" {
             pane size="50%" stacked=true {
-                pane name="Codex"
-                pane command="claude" name="Claude" cwd="dev/categorisation" expanded=true {
+                pane name="Codex" command="codex" {
+                    args "--dangerously-bypass-approvals-and-sandbox" "resume" "llm-categorizr"
+                    start_suspended true
+                }
+                pane command="claude" name="Claude" expanded=true focus=true {
                     args "--dangerously-skip-permissions" "--remote-control" "--resume" "llm-product-categorizr"
                     start_suspended true
                 }
             }
-            pane size="50%" stacked=true {
+            pane size="50%" {
                 pane stacked=true {
-                    pane
-                    pane command="zellij" cwd="dev/categorisation" focus=true expanded=true {
-                        args "action" "dump-layout"
-                        start_suspended true
+                    pane name="shell 1" expanded=true {
+                    }
+                    pane name="shell 2" {
                     }
                 }
                 pane stacked=true {
-                    pane command="tmux" {
-                        args "a" "-t" "shell3"
-                        start_suspended true
+                    pane name="shell 3" expanded=true {
                     }
-                    pane command="hx" cwd="dev/categorisation" expanded=true {
-                        args "docs/notes.md"
-                        start_suspended true
+                    pane name="shell 4" {
                     }
                 }
             }
@@ -40,7 +37,18 @@ layout {
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
         }
-        pane
+        pane split_direction="vertical" {
+            pane size="50%" stacked=true {
+                pane name="LazyGit" command="lazygit" expanded=true {
+                    
+                }                
+            }
+            pane size="50%" stacked=true {
+                pane name="Edit" command="hx" {
+                    
+                }
+            }
+        }
         pane size=1 borderless=true {
             plugin location="zellij:status-bar"
         }
