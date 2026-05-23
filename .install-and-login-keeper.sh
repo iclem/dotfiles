@@ -13,7 +13,7 @@ fi
 
 if ! "$KEEPER_BIN" list --format json &> /dev/null; then
     echo "🔐 Keeper session expired or not authenticated."
-    "$KEEPER_BIN" login
+    "$KEEPER_BIN" shell
 else
     echo "✅ Keeper Commander is authenticated and ready."
 fi
