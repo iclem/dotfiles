@@ -24,8 +24,20 @@
     stripComponents = 1
     refreshPeriod = "168h"
 [".pyenv"]
-    type = "archive"
-    url = "https://github.com/pyenv/pyenv/archive/master.tar.gz"
+    type = "git-repo"
+    url = "https://github.com/pyenv/pyenv.git"
+    exact = false
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".pyenv/plugins/pyenv-update"]
+    type = "git-repo"
+    url = "https://github.com/pyenv/pyenv-update.git"
+    exact = false
+    stripComponents = 1
+    refreshPeriod = "168h"
+[".pyenv/plugins/pyenv-virtualenv"]
+    type = "git-repo"
+    url = "https://github.com/pyenv/pyenv-virtualenv.git"
     exact = false
     stripComponents = 1
     refreshPeriod = "168h"
