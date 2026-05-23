@@ -242,6 +242,8 @@ ${venv_info}\
 [%*] $exit_code
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
 
+# Avoid having rprompt in the way for copy-paste
+setopt transient_rprompt
 
 # --- Dynamically Injected Local Overrides ---
 {{ if stat (joinPath .chezmoi.homeDir ".zshrc.local") -}}
