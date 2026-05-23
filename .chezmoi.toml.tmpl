@@ -1,0 +1,8 @@
+# This file is a template. Chezmoi uses it to generate the local chezmoi.toml automatically.
+
+[keeper]
+    # Dynamically injects your correct home directory path on any machine
+    command = "{{ .chezmoi.homeDir }}/.cache/chezmoi-keeper-venv/bin/keeper"
+
+[hooks.read-source-state.pre]
+    command = ".local/share/chezmoi/.install-and-login-keeper.sh"
