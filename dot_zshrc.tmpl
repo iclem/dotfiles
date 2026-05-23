@@ -219,7 +219,7 @@ if [[ "${(L)$(hostname)}" =~ "rasp" ]]; then
 elif [[ "$system" = "Darwin" ]]; then
     local system=" %{$fg[blue]%}$system"
 elif [[ "${(L)${system}}" =~ "linux" ]]; then
-    local system="🐧 %{$fg[cyan]%}$(uname -o)">>>>>> Stashed changes
+    local system="🐧 %{$fg[cyan]%}$(uname -o)"
 else
     local system="%{$fg[cyan]%}$(uname -o)"
 fi
@@ -243,16 +243,7 @@ ${venv_info}\
 %{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
 
 
-
-function preexec() {
-  timer=${timer:-$SECONDS}
-}
-
-function precmd() {
-  if [ $timer ]; then
-    timer_show=$(($SECONDS - $timer))
-    timer_show=$(printf "%.03f" timer_show)
-    export RPROMPT="%F{cyan}${timer_show}s %{$reset_color%}"
-    unset timer
-  fi
-}
+# --- Dynamically Injected Local Overrides ---
+{{ if stat (joinPath .chezmoi.homeDir ".zshrc.local") -}}
+{{ include (joinPath .chezmoi.homeDir ".zshrc.local") }}
+{{- end }}

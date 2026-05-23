@@ -2,3 +2,4 @@
 .pyenv/versions/**
 .pyenv/cache/**
 .oh-my-zsh/cache/**
+.zshrc.local
