@@ -11,9 +11,20 @@ if [ ! -f "$KEEPER_BIN" ]; then
     "$VENV_DIR/bin/pip" install keepercommander
 fi
 
-if ! "$KEEPER_BIN" list --format json &> /dev/null; then
-    echo "🔐 Keeper session expired or not authenticated."
-    "$KEEPER_BIN" shell
-else
+echo "🔒 Verifying Keeper session status..."
+
+# 1. Capture the exact two-word text output from login-status
+STATUS_OUTPUT=$("$KEEPER_BIN" login-status 2>&1)
+
+# 2. Match the exact string "Logged in"
+# By checking if it matches precisely, "Not logged in" will trigger the else block.
+if [[ "$STATUS_OUTPUT" == *"Logged in"* ]]; then
     echo "✅ Keeper Commander is authenticated and ready."
+else
+    echo "🔐 Keeper session is locked, expired, or not logged in."
+    echo "Current status: $STATUS_OUTPUT"
+    echo "Starting interactive login sequence..."
+    
+    # Trigger the interactive login flow natively
+    "$KEEPER_BIN" login
 fi
