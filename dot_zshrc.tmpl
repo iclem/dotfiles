@@ -164,7 +164,7 @@ source ~/.zsh_functions.zsh
 # GPG
 export GPG_TTY=$(tty)
 
-export CLOUDSDK_PYTHON=${PYENV_ROOT}/versions/3.13.9/bin/python3.13
+export CLOUDSDK_PYTHON="$(pyenv prefix 3.13)/bin/python3"
 
 # The next line updates PATH for the Google Cloud SDK.
 #[ -f "$HOME/tmp/google-cloud-sdk/path.zsh.inc" ] && . "$HOME/tmp/google-cloud-sdk/path.zsh.inc"
