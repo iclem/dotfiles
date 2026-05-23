@@ -12,6 +12,8 @@ alias gd='git diff | mate'
 alias gsl='git stash && gl && git stash pop'
 alias gsp='git stash && gp && git stash pop'
 alias gsm='git stash && gco main && git stash pop' 
+alias gbrp="git remote prune origin | awk 'BEGIN{FS=\"origin/\"};/pruned/{print \$2}' | xargs -r git branch -d "
+alias grbm="git pull --rebase --autostash origin main"
 
 alias lsttag="git tag | sort | tail -n1"
 
